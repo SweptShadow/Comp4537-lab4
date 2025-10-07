@@ -1,0 +1,74 @@
+body, h1, form, input, textarea, button {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 2rem;
+    line-height: 1.5;
+}
+
+h1 {
+    margin-bottom: 1rem;
+    color: #222;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+form {
+    max-width: 500px;
+    margin: 0 auto 2rem auto;
+    padding: 1.5rem;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+button {
+    background-color: #0078d7;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+button:hover {
+    background-color: #005fa3;
+}
+
+#feedback,
+#result {
+    max-width: 500px;
+    margin: 1rem auto;
+    padding: 1rem;
+    background: #eef6ff;
+    border: 1px solid #cce0ff;
+    border-radius: 4px;
+    font-size: 0.95rem;
+
+    /* preserve JSON formatting */
+    white-space: pre-wrap;
+}

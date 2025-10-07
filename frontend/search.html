@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Search for word definitions in the dictionary">
+
+    <title>Search Definition</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <main>
+        
+        <h1>Search Dictionary</h1>
+
+        <label for="searchWord">Enter word to search:</label>
+        
+        <input type="text" id="searchWord" placeholder="Enter word">
+
+        <button id="searchBtn">Search</button>
+
+        <div id="result" role="region" aria-live="polite"></div>
+
+    </main>
+
+    <!-- Load shared API client first -->
+    <script src="js/ApiClient.js"></script>
+
+    <!-- Then load the page controller -->
+    <script src="js/SearchPage.js"></script>
+
+</body>
+
+</html>
