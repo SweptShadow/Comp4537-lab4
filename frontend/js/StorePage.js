@@ -46,10 +46,10 @@ class StorePage {
 document.addEventListener('DOMContentLoaded', async () => {
 
     const langUtil = new LangUtil();
-    
+
     await langUtil.loadStrings();
 
-    const api = new ApiClient('https://BackendDomain.xyz'); // replace with backend URL
+    const api = new ApiClient('https://lab4-dictionary-api.onrender.com/');
 
     new StorePage(api, langUtil);
 });
