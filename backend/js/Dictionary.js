@@ -9,26 +9,26 @@ class Dictionary {
 
     constructor() {
 
-        this.entries = [];
+        this.dictionary = [];
 
     }
 
     add(word, definition) {
 
-        if (this.entries.some(e => e.word === word)) {
+        if (this.dictionary.some(e => e.word === word)) {
 
             return { exists: true };
         }
 
-        this.entries.push({ word, definition });
+        this.dictionary.push({ word, definition });
 
-        return { exists: false, total: this.entries.length };
+        return { exists: false, total: this.dictionary.length };
 
     }
 
     find(word) {
 
-        return this.entries.find(e => e.word === word);
+        return this.dictionary.find(e => e.word === word);
 
     }
 }
