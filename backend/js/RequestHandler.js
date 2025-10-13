@@ -24,6 +24,16 @@ class RequestHandler {
 
         const parsedUrl = url.parse(req.url, true);
 
+        // Handle CORS preflight requests
+        if (req.method === 'OPTIONS') {
+            res.writeHead(200, {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            });
+            return res.end();
+        }
+
         if (req.method === 'GET' && parsedUrl.pathname === '/api/definitions') {
 
             const word = parsedUrl.query.word;
@@ -57,7 +67,7 @@ class RequestHandler {
 
                     if (!word || !definition) {
 
-                        res.writeHead(400, { 'Content-Type': 'application/json' });
+                        res.writeHead(400, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
 
                         return res.end(JSON.stringify({ message: this.langUtil.getString('errors.invalidInput') }));
                     }
@@ -66,15 +76,15 @@ class RequestHandler {
 
                     if (result.exists) {
 
-                        res.writeHead(409, { 'Content-Type': 'application/json' });
+                        res.writeHead(409, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
                         res.end(JSON.stringify({
-                            
+
                             message: this.langUtil.getString('success.warningExists', { word }),
                             requestCount: this.requestCount
                         }));
                     } else {
 
-                        res.writeHead(201, { 'Content-Type': 'application/json' });
+                        res.writeHead(201, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
                         res.end(JSON.stringify({
 
                             message: this.langUtil.getString('success.newEntryRecorded'),
@@ -84,7 +94,7 @@ class RequestHandler {
                     }
                 } catch {
 
-                    res.writeHead(400, { 'Content-Type': 'application/json' });
+                    res.writeHead(400, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
                     res.end(JSON.stringify({ message: this.langUtil.getString('errors.badJson') }));
                 }
             });
@@ -92,7 +102,7 @@ class RequestHandler {
 
         else {
 
-            res.writeHead(404, { 'Content-Type': 'application/json' });
+            res.writeHead(404, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
             res.end(JSON.stringify({ message: this.langUtil.getString('errors.notFound') }));
         }
     }

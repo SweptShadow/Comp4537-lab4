@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     await langUtil.loadStrings();
 
-    const api = new ApiClient('https://lab4-dictionary-api.onrender.com/');
+    const api = new ApiClient('https://lab4-dictionary-api.onrender.com');
 
     new StorePage(api, langUtil);
 });
