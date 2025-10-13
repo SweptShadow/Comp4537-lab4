@@ -1,0 +1,17 @@
+{
+    "errors": {
+        "invalidInput": "Invalid input",
+        "badJson": "Bad JSON",
+        "notFound": "Not Found",
+        "wordNotFound": "Word '{word}' not found"
+    },
+
+    "success": {
+        "newEntryRecorded": "New entry recorded",
+        "warningExists": "Warning! '{word}' already exists"
+    },
+    
+    "console": {
+        "serverRunning": "Server running on port {port}"
+    }
+}

@@ -30,14 +30,17 @@
             <textarea id="definition" placeholder="Definition" required></textarea>
 
             <button type="submit">Submit</button>
-            
+
         </form>
 
         <div id="feedback" role="region" aria-live="polite"></div>
 
     </main>
 
-    <!-- Load shared API client first -->
+    <!-- Load language utility first -->
+    <script src="js/LangUtil.js"></script>
+
+    <!-- Load shared API client -->
     <script src="js/ApiClient.js"></script>
 
     <!-- Then load the page controller -->

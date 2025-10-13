@@ -7,13 +7,14 @@
 
 class SearchPage {
 
-    constructor(apiClient) {
+    constructor(apiClient, langUtil) {
 
         this.apiClient = apiClient;
+        this.langUtil = langUtil;
         this.searchBtn = document.getElementById('searchBtn');
         this.searchInput = document.getElementById('searchWord');
         this.result = document.getElementById('result');
-        
+
         this.attachEvents();
     }
 
@@ -25,7 +26,7 @@ class SearchPage {
 
             if (!word) {
 
-                this.result.textContent = 'Please enter a word.';
+                this.result.textContent = this.langUtil.getString('validation.enterWord');
 
                 return;
             }
@@ -38,9 +39,12 @@ class SearchPage {
 }
 
 // bootstrap
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+
+    const langUtil = new LangUtil();
+    await langUtil.loadStrings();
 
     const api = new ApiClient('https://BackendDomain.xyz'); // replace with backend URL
 
-    new SearchPage(api);
+    new SearchPage(api, langUtil);
 });

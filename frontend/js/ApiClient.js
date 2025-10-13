@@ -1,7 +1,6 @@
 /**
  * API client for communicating w/ Dictionary REST service, provides methods for adding new definitions 
- * via POST & retrieving definitions via GET.Handles HTTP requests using
- * Fetch API w/ proper JSON formatting.
+ * via POST & retrieving definitions via GET.Handles HTTP requests using fetch API.
  * 
  * @class ApiClient
  */

@@ -7,14 +7,15 @@
 
 class StorePage {
 
-    constructor(apiClient) {
+    constructor(apiClient, langUtil) {
 
         this.apiClient = apiClient;
+        this.langUtil = langUtil;
         this.form = document.getElementById('storeForm');
         this.wordInput = document.getElementById('word');
         this.definitionInput = document.getElementById('definition');
         this.feedback = document.getElementById('feedback');
-        
+
         this.attachEvents();
     }
 
@@ -28,9 +29,12 @@ class StorePage {
             const definition = this.definitionInput.value.trim();
 
             if (!word || !definition) {
-                this.feedback.textContent = 'Please enter both word and definition.';
+
+                this.feedback.textContent = this.langUtil.getString('validation.enterBothFields');
+
                 return;
             }
+
             const result = await this.apiClient.addDefinition(word, definition);
 
             this.feedback.textContent = JSON.stringify(result);
@@ -39,9 +43,13 @@ class StorePage {
 }
 
 // bootstrap
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+
+    const langUtil = new LangUtil();
+    
+    await langUtil.loadStrings();
 
     const api = new ApiClient('https://BackendDomain.xyz'); // replace with backend URL
 
-    new StorePage(api);
+    new StorePage(api, langUtil);
 });

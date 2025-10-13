@@ -16,11 +16,11 @@
 <body>
 
     <main>
-        
+
         <h1>Search Dictionary</h1>
 
         <label for="searchWord">Enter word to search:</label>
-        
+
         <input type="text" id="searchWord" placeholder="Enter word">
 
         <button id="searchBtn">Search</button>
@@ -29,7 +29,10 @@
 
     </main>
 
-    <!-- Load shared API client first -->
+    <!-- Load language utility first -->
+    <script src="js/LangUtil.js"></script>
+
+    <!-- Load shared API client -->
     <script src="js/ApiClient.js"></script>
 
     <!-- Then load the page controller -->

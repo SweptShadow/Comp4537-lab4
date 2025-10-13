@@ -1,6 +1,8 @@
 /**
  * HTTP request handler for Dictionary REST API, processes GET requests for word lookups & POST requests for adding new def.
- * Manages request counting, error handling & JSON response formatting w/ CORS support.
+ * Manage request counting, error handling & JSON response formatting w/ CORS support.
+ * 
+ * ChatGPT used to fix errors within this file.
  * 
  * @class RequestHandler
  */
@@ -9,9 +11,10 @@ const url = require('url');
 
 class RequestHandler {
 
-    constructor(dictionary) {
+    constructor(dictionary, langUtil) {
 
         this.dictionary = dictionary;
+        this.langUtil = langUtil;
         this.requestCount = 0;
     }
 
@@ -33,7 +36,10 @@ class RequestHandler {
                 res.end(JSON.stringify({ requestCount: this.requestCount, entry }));
             } else {
 
-                res.end(JSON.stringify({ requestCount: this.requestCount, message: `Word '${word}' not found` }));
+                res.end(JSON.stringify({
+                    requestCount: this.requestCount,
+                    message: this.langUtil.getString('errors.wordNotFound', { word })
+                }));
             }
         }
 
@@ -53,7 +59,7 @@ class RequestHandler {
 
                         res.writeHead(400, { 'Content-Type': 'application/json' });
 
-                        return res.end(JSON.stringify({ message: 'Invalid input' }));
+                        return res.end(JSON.stringify({ message: this.langUtil.getString('errors.invalidInput') }));
                     }
 
                     const result = this.dictionary.add(word, definition);
@@ -61,16 +67,25 @@ class RequestHandler {
                     if (result.exists) {
 
                         res.writeHead(409, { 'Content-Type': 'application/json' });
-                        res.end(JSON.stringify({ message: `Warning! '${word}' already exists`, requestCount: this.requestCount }));
+                        res.end(JSON.stringify({
+                            
+                            message: this.langUtil.getString('success.warningExists', { word }),
+                            requestCount: this.requestCount
+                        }));
                     } else {
 
                         res.writeHead(201, { 'Content-Type': 'application/json' });
-                        res.end(JSON.stringify({ message: 'New entry recorded', requestCount: this.requestCount, totalEntries: result.total }));
+                        res.end(JSON.stringify({
+
+                            message: this.langUtil.getString('success.newEntryRecorded'),
+                            requestCount: this.requestCount,
+                            totalEntries: result.total
+                        }));
                     }
                 } catch {
 
                     res.writeHead(400, { 'Content-Type': 'application/json' });
-                    res.end(JSON.stringify({ message: 'Bad JSON' }));
+                    res.end(JSON.stringify({ message: this.langUtil.getString('errors.badJson') }));
                 }
             });
         }
@@ -78,7 +93,7 @@ class RequestHandler {
         else {
 
             res.writeHead(404, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ message: 'Not Found' }));
+            res.end(JSON.stringify({ message: this.langUtil.getString('errors.notFound') }));
         }
     }
 }

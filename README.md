@@ -6,19 +6,25 @@ A cross-origin dictionary application w/ a Node.js REST API backend & vanilla Ja
 
 ```
 Lab-4/
+│
 ├── frontend/                 # Client-side application (Server 1)
 │   ├── search.html          # Search definitions page
 │   ├── store.html           # Add definitions page
 │   ├── css/style.css        # Styling
+│   ├── lang/en/en.json      # Frontend language strings
 │   └── js/
 │       ├── ApiClient.js     # HTTP client for API calls
 │       ├── SearchPage.js    # Search page controller
-│       └── StorePage.js     # Store page controller
+│       ├── StorePage.js     # Store page controller
+│       └── LangUtil.js      # Frontend language utility
+│
 ├── backend/                 # REST API server (Server 2)
+│   ├── lang/en/en.json      # Backend language strings
 │   └── js/
 │       ├── App.js           # Main server application
 │       ├── Dictionary.js    # In-memory data store
-│       └── RequestHandler.js # HTTP request router
+│       ├── RequestHandler.js # HTTP request router
+│       └── LangUtil.js      # Backend language utility
 └── README.md
 ```
 
@@ -104,6 +110,8 @@ http-server -p 8000
 - Request counting and error handling
 - Input validation (client and server)
 - JSON response formatting
+- Internationalization support with language files
+- Responsive design ready
 
 ## Technology Stack
 
@@ -112,6 +120,7 @@ http-server -p 8000
 
 - **Architecture**: Client-server with RESTful API
 - **Data Storage**: In-memory array (no database required)
+- **Internationalization**: JSON language files for user-facing strings
 
 ## Usage
 

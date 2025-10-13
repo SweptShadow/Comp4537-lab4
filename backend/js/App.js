@@ -1,14 +1,15 @@
 /**
- * Main entry point for Dictionary REST API server, makes the HTTP server,
- * dictionary storage & request handling components. Provide RESTful service for 
- * storing & retrieving English word def.
+ * Main entry point for Dictionary REST API server, makes the HTTP server, 
+ * dictionary storage & request handling components. RESTful service for 
+ * storing & retrieving eng word def.
  * 
  * @class App
- */
+*/
 
 const http = require('http');
 const Dictionary = require('./Dictionary');
 const RequestHandler = require('./RequestHandler');
+const LangUtil = require('./LangUtil');
 
 class App {
 
@@ -16,7 +17,8 @@ class App {
 
         this.port = port;
         this.dictionary = new Dictionary();
-        this.handler = new RequestHandler(this.dictionary);
+        this.langUtil = new LangUtil();
+        this.handler = new RequestHandler(this.dictionary, this.langUtil);
         this.server = http.createServer((req, res) => this.handler.handle(req, res));
     }
 
@@ -24,12 +26,12 @@ class App {
 
         this.server.listen(this.port, () => {
 
-            console.log(`Server running on port ${this.port}`);
+            console.log(this.langUtil.getString('console.serverRunning', { port: this.port }));
         });
     }
-}
-
-// bootstrap
-const app = new App(3000);
+    
+}// bootstrap
+const port = process.env.PORT || 3000;
+const app = new App(port);
 
 app.start();

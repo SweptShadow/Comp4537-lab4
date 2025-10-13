@@ -1,0 +1,6 @@
+{
+    "validation": {
+        "enterWord": "Please enter a word.",
+        "enterBothFields": "Please enter both word and definition."
+    }
+}

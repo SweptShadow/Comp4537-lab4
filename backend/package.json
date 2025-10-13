@@ -1,0 +1,20 @@
+{
+    "name": "lab4-dictionary-api",
+    "version": "1.0.0",
+    "description": "Dictionary REST API backend for Lab 4",
+    "main": "js/App.js",
+    "scripts": {
+        "start": "node js/App.js"
+    },
+    "engines": {
+        "node": ">=14.0.0"
+    },
+    "keywords": [
+        "dictionary",
+        "api",
+        "rest",
+        "nodejs"
+    ],
+    "author": "Your Name",
+    "license": "MIT"
+}
