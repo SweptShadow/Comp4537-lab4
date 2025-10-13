@@ -8,6 +8,7 @@ A cross-origin dictionary application w/ a Node.js REST API backend & vanilla Ja
 Lab-4/
 │
 ├── frontend/                 # Client-side application (Server 1)
+│   ├── index.html           # Homepage with navigation
 │   ├── search.html          # Search definitions page
 │   ├── store.html           # Add definitions page
 │   ├── css/style.css        # Styling
@@ -19,13 +20,16 @@ Lab-4/
 │       └── LangUtil.js      # Frontend language utility
 │
 ├── backend/                 # REST API server (Server 2)
+│   ├── package.json         # Project configuration
 │   ├── lang/en/en.json      # Backend language strings
 │   └── js/
 │       ├── App.js           # Main server application
 │       ├── Dictionary.js    # In-memory data store
 │       ├── RequestHandler.js # HTTP request router
 │       └── LangUtil.js      # Backend language utility
-└── README.md
+│
+├── .gitignore              # Git ignore rules
+└── README.md               # Project documentation
 ```
 
 ## API Endpoints
@@ -54,6 +58,8 @@ In both `SearchPage.js` and `StorePage.js`, update the API base URL:
 // Change from production URL to local
 const api = new ApiClient('http://localhost:3000');
 ```
+
+**Note**: For production, the frontend uses: `https://lab4-dictionary-api.onrender.com`
 
 ### 3. Serve Frontend Files
 Since browsers block file:// protocol for security, serve the frontend using:
@@ -89,10 +95,10 @@ http-server -p 8000
 ```
 
 ### 4. Test the Application
-1. Open `store.html` in your browser
-2. Add a word and definition
-3. Open `search.html` in your browser  
-4. Search for the word you just added
+1. Open `index.html` to access the homepage with navigation
+2. Navigate to `store.html` to add a word and definition
+3. Navigate to `search.html` to search for words
+4. Verify cross-origin communication is working
 
 ## Deployment
 - **Frontend** (Server 1): Static files hosted on any web server
@@ -100,18 +106,24 @@ http-server -p 8000
 - **CORS**: Enabled for cross-origin requests
 
 ### Production URLs
-- Frontend hosted at: ~frontend URL~
-- Backend API hosted at: ~~backend URL~/api/definitions
+- **Frontend**: https://comp4537lab4s7frontend.netlify.app
+- **Backend API**: https://lab4-dictionary-api.onrender.com
+
+### Hosting Services
+- **Frontend (Server 1)**: Netlify (Static hosting)
+- **Backend (Server 2)**: Render.com (Node.js hosting)
 
 ## Features
 - RESTful API with GET/POST endpoints
-- Cross-origin resource sharing (CORS)
-- In-memory data storage
-- Request counting and error handling
-- Input validation (client and server)
-- JSON response formatting
-- Internationalization support with language files
-- Responsive design ready
+- Cross-origin resource sharing (CORS) enabled
+- In-memory data storage with proper variable naming (`dictionary`)
+- Request counting and error handling with appropriate HTTP status codes
+- Input validation (client and server side)
+- JSON response formatting with user-friendly display
+- Internationalization support with separate language files
+- Responsive design with navigation between pages
+- JavaDoc-style comments in all JavaScript files
+- Class-based architecture following ES6 standards
 
 ## Technology Stack
 
@@ -124,8 +136,14 @@ http-server -p 8000
 
 ## Usage
 
-1. **Add Definitions**: Use `store.html` to add new word/definition pairs
+1. **Homepage**: Access `index.html` for navigation between store and search pages
 
-2. **Search Words**: Use `search.html` to look up existing definitions
+2. **Add Definitions**: Use `store.html` to add new word/definition pairs
+   - Displays both JSON response and user-friendly success/error messages
+   - Form clears automatically on successful submission
 
-3. **API Responses**: Include request count and appropriate status codes
+3. **Search Words**: Use `search.html` to look up existing definitions
+   - Shows both raw JSON and formatted word: definition display
+   - Provides clear "not found" messages for missing words
+
+4. **API Responses**: All responses include request count and appropriate HTTP status codes

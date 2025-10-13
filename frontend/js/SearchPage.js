@@ -33,8 +33,43 @@ class SearchPage {
 
             const data = await this.apiClient.getDefinition(word);
 
+            // Clear any previous formatted displays
+            this.clearPreviousResults();
+
+            // Display raw JSON response first
             this.result.textContent = JSON.stringify(data);
+
+            // formatted display below
+            if (data.entry) {
+
+                // Word found - create formatted display
+                const formattedDiv = document.createElement('div');
+
+                formattedDiv.className = 'definition-display';
+
+                formattedDiv.innerHTML = `
+                    <div class="definition-word">${data.entry.word}</div>
+                    <div class="definition-text">${data.entry.definition}</div>
+                `;
+
+                this.result.parentNode.insertBefore(formattedDiv, this.result.nextSibling);
+            } else {
+
+                // Word not found - create error display
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error-display';
+                errorDiv.textContent = `Request# ${data.requestCount}, word '${word}' not found!`;
+                this.result.parentNode.insertBefore(errorDiv, this.result.nextSibling);
+            }
         });
+    }
+
+    clearPreviousResults() {
+
+        // Remove any existing formatted displays
+        const existingDisplays = document.querySelectorAll('.definition-display, .error-display, .success-display');
+        
+        existingDisplays.forEach(display => display.remove());
     }
 }
 
